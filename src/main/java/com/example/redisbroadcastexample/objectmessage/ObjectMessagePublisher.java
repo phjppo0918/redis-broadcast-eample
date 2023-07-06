@@ -1,4 +1,4 @@
-package com.example.redisbroadcastexample;
+package com.example.redisbroadcastexample.objectmessage;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -10,14 +10,12 @@ import org.springframework.stereotype.Component;
 @Component
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
-public class MessagePublisher {
+public class ObjectMessagePublisher {
+    RedisTemplate<String, Member> redisTemplate;
+    ChannelTopic topic = new ChannelTopic("broadcast-obj-channel");
 
-    RedisTemplate<String, String> redisTemplate;
-    ChannelTopic topic;
 
-
-    public void publish(String message) {
-        redisTemplate.convertAndSend(topic.getTopic(), message);
+    public void publish(Member message) {
         redisTemplate.convertAndSend(topic.getTopic(), message);
         // redisTemplate.convertAndSend(topic.getTopic(), message);
     }

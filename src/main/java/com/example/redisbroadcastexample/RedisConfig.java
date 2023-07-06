@@ -20,6 +20,7 @@ public class RedisConfig {
         container.addMessageListener(messageSubscriber, topic());
         return container;
     }
+
     @Bean
     public RedisMessageListenerContainer redisBufferMessageListenerContainer(RedisConnectionFactory connectionFactory, MessageBufferSubscriber messageBufferSubscriber) {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
